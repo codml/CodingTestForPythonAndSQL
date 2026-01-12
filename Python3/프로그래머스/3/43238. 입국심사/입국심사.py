@@ -3,8 +3,6 @@ def cal_people(arr, time, target):
     flag = False
     for a in arr:
         people += time // a
-        if people > target:
-            break
         if not flag and time % a == 0:
             flag = True
     return people, flag
