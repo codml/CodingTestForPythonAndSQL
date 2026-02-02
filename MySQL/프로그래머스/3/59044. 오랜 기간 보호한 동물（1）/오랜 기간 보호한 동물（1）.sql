@@ -1,0 +1,19 @@
+SELECT
+    *
+FROM
+    (SELECT
+        I.NAME,
+        I.DATETIME
+    FROM
+        ANIMAL_INS I
+        LEFT JOIN
+        ANIMAL_OUTS O
+        ON I.ANIMAL_ID = O.ANIMAL_ID
+    WHERE
+        O.ANIMAL_ID IS NULL
+    ORDER BY
+        NOW() - I.DATETIME DESC
+    LIMIT
+        3) RESULT
+ORDER BY
+    DATETIME
