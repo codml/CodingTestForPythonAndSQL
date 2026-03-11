@@ -1,0 +1,20 @@
+WITH ECOLI_SIZE AS (
+    SELECT
+        ID,
+        PERCENT_RANK() OVER (ORDER BY SIZE_OF_COLONY DESC) * 100 SIZE
+    FROM
+        ECOLI_DATA
+    )
+SELECT
+    ID,
+    CASE
+        WHEN SIZE <= 25 THEN 'CRITICAL'
+        WHEN SIZE <= 50 THEN 'HIGH'
+        WHEN SIZE <= 75 THEN 'MEDIUM'
+        ELSE 'LOW'
+    END COLONY_NAME
+FROM
+    ECOLI_SIZE
+ORDER BY
+    ID
+    
