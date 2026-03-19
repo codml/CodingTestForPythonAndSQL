@@ -1,0 +1,24 @@
+WITH GB AS
+(
+    SELECT
+        CATEGORY,
+        MAX(PRICE) PRICE
+    FROM
+        FOOD_PRODUCT
+    WHERE
+        CATEGORY REGEXP '과자|국|김치|식용유'
+    GROUP BY
+        CATEGORY
+)
+SELECT
+    GB.CATEGORY,
+    GB.PRICE,
+    F.PRODUCT_NAME
+FROM    
+    FOOD_PRODUCT F
+    JOIN
+    GB
+    ON F.PRICE = GB.PRICE
+        AND F.CATEGORY = GB.CATEGORY
+ORDER BY
+    GB.PRICE DESC
